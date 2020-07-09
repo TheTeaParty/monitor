@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mongo:
+    image: "mongo:4.2.5"
+    ports:
+      - "27017:27017"
+  monitoring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PORT=:8080
+      - ENVIRONMENT=production
+      - MONGODB_HOSTS=mongo:27017
+      - MONGODB_USERNAME=mongodb
+      - MONGODB_DATABASE=mos-monitor
+      - MONGODB_TLS=no
+    ports:
+      - "8080:8080"

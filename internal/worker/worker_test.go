@@ -25,7 +25,7 @@ func Test_doRequests(t *testing.T) {
 		"google.com",
 	}
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 3; i++ {
 		urls = append(urls, urls...)
 	}
 

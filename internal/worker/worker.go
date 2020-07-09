@@ -73,7 +73,7 @@ func RunServiceMonitor(ctx context.Context, serviceURLs []*domain.Service) (chan
 	out := make(chan []*domain.Report)
 	errC := make(chan error, 1)
 
-	ticker := time.NewTicker(5 * time.Second)
+	ticker := time.NewTicker(time.Minute)
 
 	go func() {
 		defer close(out)

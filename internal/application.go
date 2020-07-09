@@ -27,11 +27,15 @@ func (a *Application) RunServiceWatcher(ctx context.Context) error {
 
 	services, err := a.ServiceRepository.GetAll()
 	if err != nil {
+		a.Logger.Error("Error getting services",
+			zap.Error(err))
 		return err
 	}
 
 	out, _, err := worker.RunServiceMonitor(ctx, services)
 	if err != nil {
+		a.Logger.Error("Error running monitor",
+			zap.Error(err))
 		return err
 	}
 
