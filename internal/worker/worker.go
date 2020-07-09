@@ -79,7 +79,7 @@ func RunServiceMonitor(ctx context.Context, serviceURLs []*domain.Service) (chan
 		defer close(out)
 		defer close(errC)
 
-		for range ticker.C {
+		for ; true; <-ticker.C {
 
 			urls := make([]string, len(serviceURLs))
 			for i, s := range serviceURLs {
