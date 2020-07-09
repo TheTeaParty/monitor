@@ -1,0 +1,84 @@
+openapi: 3.0.1
+info:
+  title: Monitoring API
+  description: API for monitoring.
+  version: 1.0.0
+servers:
+  - url: 'https://api.monitoring.local'
+paths:
+  /reports:
+    get:
+      summary: Get reports.
+      operationId: getReports
+      parameters:
+        - name: reportedAtFrom
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: reportedAtTo
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: serviceURLs
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: responseTimeMoreThen
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: responseTimeLessThen
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+components:
+  schemas:
+    Report:
+      type: object
+      required:
+        - id
+        - createdAt
+        - serviceURL
+        - responseTime
+        - status
+        - details
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: integer
+        serviceURL:
+          type: string
+        responseTime:
+          type: integer
+        status:
+          type: string
+        details:
+          type: string
